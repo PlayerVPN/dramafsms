@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FSMS School Drama</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Oswald:wght@500&display=swap" rel="stylesheet">
+  <style>
+    /* Global Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #121212;
+      color: #e0e0e0;
+      overflow-x: hidden;
+    }
+
+    /* Scrollbar Customization */
+    ::-webkit-scrollbar {
+      width: 16px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(145deg, #f8b400, #d52e2e);
+      border-radius: 8px;
+      transition: background 0.3s ease;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(145deg, #ff7200, #c82e2e);
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #333;
+      border-radius: 8px;
+    }
+
+    /* Header Styles */
+    header {
+      background-color: #000;
+      color: #fff;
+      padding: 40px 0;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    header h1 {
+      font-size: 4rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+      font-family: 'Oswald', sans-serif;
+    }
+
+    header nav {
+      margin-top: 10px;
+    }
+
+    header nav a {
+      color: #fff;
+      font-size: 1.2rem;
+      margin: 0 20px;
+      text-decoration: none;
+      transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+
+    header nav a:hover {
+      color: #f8b400;
+      text-decoration: underline;
+      text-shadow: 0 0 10px #f8b400;
+    }
+
+    /* Hero Section */
+    .hero {
+      background-image: url('fsms-hero.jpg');
+      background-size: cover;
+      background-position: center;
+      height: 60vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      position: relative;
+      padding: 0 20px;
+    }
+
+    .hero h2 {
+      font-size: 3rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      z-index: 10;
+      text-align: center;
+      letter-spacing: 2px;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 5;
+    }
+
+    /* Main Layout */
+    .main-container {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      padding: 40px 20px;
+      animation: fadeInUp 1s ease-in-out;
+    }
+
+    /* Featured News Section */
+    .featured-news {
+      display: flex;
+      gap: 30px;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .featured-article {
+      width: 60%;
+      background: linear-gradient(145deg, #1e1e1e, #333333);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .featured-article:hover {
+      transform: scale(1.05);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.8);
+    }
+
+    .featured-article img {
+      width: 100%;
+      height: 350px;
+      object-fit: cover;
+      border-bottom: 5px solid #f8b400;
+    }
+
+    .featured-article h2 {
+      font-size: 2.5rem;
+      color: #fff;
+      margin: 20px;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+
+    .featured-article p {
+      color: #bbb;
+      font-size: 1.1rem;
+      margin: 0 20px 20px;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 30%;
+      background-color: #1d1d1d;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+      transition: transform 0.3s ease;
+      margin-top: 30px;
+    }
+
+    .sidebar:hover {
+      transform: translateX(5px);
+    }
+
+    .sidebar h3 {
+      color: #fff;
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+    }
+
+    .sidebar .sidebar-item {
+      background-color: #333;
+      margin-bottom: 15px;
+      padding: 15px;
+      border-radius: 8px;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      cursor: pointer;
+    }
+
+    .sidebar .sidebar-item:hover {
+      background-color: #f8b400;
+      transform: translateX(10px);
+    }
+
+    .sidebar .sidebar-item h4 {
+      font-size: 1.3rem;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .sidebar .sidebar-item p {
+      font-size: 1.1rem;
+      color: #bbb;
+    }
+
+    /* Main Content Section */
+    .main-content {
+      display: flex;
+      gap: 30px;
+      justify-content: space-between;
+    }
+
+    .articles {
+      width: 65%;
+    }
+
+    .article-card {
+      background-color: #1d1d1d;
+      border-radius: 10px;
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.6);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      margin-bottom: 20px;
+      padding: 15px;
+    }
+
+    .article-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.8);
+    }
+
+    .article-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .article-card h3 {
+      color: #fff;
+      font-size: 1.6rem;
+      padding: 15px;
+    }
+
+    .article-card p {
+      color: #bbb;
+      padding: 0 15px 15px;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #000;
+      color: #888;
+      padding: 40px 20px;
+      text-align: center;
+      margin-top: 30px;
+      border-top: 2px solid #444;
+    }
+
+    footer p {
+      font-size: 1.2rem;
+    }
+
+    footer a {
+      color: #f8b400;
+      text-decoration: none;
+      font-weight: bold;
+      margin: 0 10px;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Media Queries for Mobile */
+    @media (max-width: 768px) {
+      .hero h2 {
+        font-size: 2.5rem;
+      }
+
+      .main-container {
+        padding: 20px;
+      }
+
+      .featured-news {
+        flex-direction: column;
+      }
+
+      .featured-article, .sidebar {
+        width: 100%;
+      }
+
+      .main-content {
+        flex-direction: column;
+      }
+
+      .articles {
+        width: 100%;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>FSMS weekly drama!</h1>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Featured</a>
+      <a href="#">News</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <h2>Breaking News from FSMS</h2>
+  </div>
+
+  <div class="main-container">
+    <!-- Featured News Section -->
+    <div class="featured-news">
+      <div class="featured-article">
+        <img src="fsms-featured-article1.jpg" alt="Featured Article">
+        <h2>Newest Story!</h2>
+        <p>We have uncovered shocking news; Brian & Juliana! I mean, who saw it coming!?</p>
+      </div>
+      <div class="sidebar">
+        <h3>Trending Stories</h3>
+        <div class="sidebar-item">
+          <h4>Student meets student</h4>
+          <p>New students are EVERYWHERE these days, especially in FSMS. We have found out that a BRAND new student was put here, and already went to the 7th grade dean!</p>
+        </div>
+        <div class="sidebar-item">
+          <h4>Principal news</h4>
+          <p>We have just found out SHOCKING news! Mrs. Loya is thinking about retiring with her pet oreo.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content Section -->
+    <div class="main-content">
+      <div class="articles">
+        <div class="article-card">
+          <img src="fsms-article1.jpg" alt="Article 1">
+          <h3>Altercation in the Gym</h3>
+          <p>The unexpected altercation between two students; Shane & Jasmine.</p>
+        </div>
+        <div class="article-card">
+          <img src="fsms-article2.jpg" alt="Article 2">
+          <h3>Student leaves the school!</h3>
+          <p>Student named Alis (the school furry) has just moved after getting bullied! I mean, imagine moving over nothing!</p>
+        </div>
+        <div class="article-card">
+          <img src="fsms-article3.jpg" alt="Article 3">
+          <h3>Upcoming news!</h3>
+          <p>Will Juliana & Bryan come out as a couple? Wait and find out!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2024 FSMS DRAMA</p>
+    <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+  </footer>
+
+</body>
+</html>
